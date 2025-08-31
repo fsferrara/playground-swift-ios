@@ -7,6 +7,7 @@ public protocol LocationModel {
     func isEnabledAndAuthorized() -> Bool
     func requestPermission(_ completion: @escaping ((CLAuthorizationStatus) -> Void))
     func fetchCurrentLocation(_ completion: @escaping (CLLocation?) -> Void)
+    func getLastKnownLocation() -> CLLocation?
 }
 
 class LocationModelImpl: NSObject, CLLocationManagerDelegate, LocationModel {
@@ -47,6 +48,10 @@ class LocationModelImpl: NSObject, CLLocationManagerDelegate, LocationModel {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         requestPermissionCompletion?(manager.authorizationStatus)
         requestPermissionCompletion = nil
+    }
+
+    func getLastKnownLocation() -> CLLocation? {
+        return locationManager.location
     }
 
     func fetchCurrentLocation(_ completion: @escaping (CLLocation?) -> Void) {

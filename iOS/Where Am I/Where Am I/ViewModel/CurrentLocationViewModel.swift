@@ -19,7 +19,15 @@ class CurrentLocationViewModel: ObservableObject {
                 self?.placemarkFetcher.fetchFirstPlacemark(from: location) { [weak self] placemark in
                     self?.placemark = placemark
                 }
+            }
+        }
+    }
 
+    func fetchLastKnownLocation() {
+        if let location = locationModel.getLastKnownLocation() {
+            self.location = location
+            self.placemarkFetcher.fetchFirstPlacemark(from: location) { [weak self] placemark in
+                self?.placemark = placemark
             }
         }
     }

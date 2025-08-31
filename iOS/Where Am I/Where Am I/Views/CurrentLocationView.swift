@@ -28,9 +28,16 @@ struct CurrentLocationView: View {
                     Text("Postal Code: \(placemark.postalCode ?? "N/A")")
                 }
             }
-            // Add a button to refresh location
+
             Button("Refresh Location") {
                 viewModel.fetchCurrentLocation()
+            }
+            .padding()
+            .buttonStyle(.borderedProminent)
+            .controlSize(.large)
+
+            Button("Last Known Location") {
+                viewModel.fetchLastKnownLocation()
             }
             .padding()
             .buttonStyle(.borderedProminent)
